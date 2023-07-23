@@ -1,0 +1,112 @@
+body{
+    margin : -2.8vw;
+    padding-bottom: 3vw;;
+}
+
+
+.title{
+    text-align: center;
+    background-color: #ee3425;
+    color : white;
+    font-size : 2vw;
+    height : 6vw;
+    line-height: 6vw;;
+}
+
+.searchbox{
+    display: flex;
+    justify-content: center;
+    margin-top : 4vw;
+}
+
+.searchInput{
+    width : 50%;
+    height : 3vw;
+    font-size: 1vw;
+    text-align: center;
+    justify-content: center;
+}
+
+.searchBtn{
+    width : 10%;
+    height : 3.31vw;
+    font-size: 2vw;
+    background-color: #ee3425;
+    color : white;
+    text-align: center;
+    justify-content: center;
+    cursor: pointer;
+    line-height: 3.31vw;
+    border : 1px solid black;
+}
+
+.list{
+    list-style-type: none;
+    margin-top : 5vw;
+    margin-left : 1vw;
+}
+
+.mainDiv{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30vw, 1fr));
+    text-align: center;
+    align-items: center;
+    padding-left : 5vw;
+    row-gap: 2vw;
+}
+
+.moviePoster{
+    height : 80%;
+    width : 100%
+}
+
+.cardTitle{
+    font-size : 1.4vw;
+}
+
+.movieCard{
+    border : 2px solid black;
+    width : 20vw;
+    height : 25vw;
+    cursor: pointer;
+    text-decoration: none;
+    color : black;
+    background-color: rgb(250, 235, 223);
+    border-radius: 10px;
+    padding : 0.5vw;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+
+.leftImg, .rightImg{
+    height : 4vw;
+    width : 4vw;
+    cursor: pointer;
+}
+
+
+
+.displayNone{
+    display: none;
+}
+
+.pagination{
+    height : 4vw;
+    width : 80vw;
+    display: flex;
+    margin : auto;
+    margin-top : 8%;
+}
+
+.rightImg{
+    margin-left : 35%
+}
+
+
+.pageNo{
+    background-color: rgb(244, 226, 198);
+    width : 10vw;
+    margin-left : 40%;
+    text-align: center;
+
+}

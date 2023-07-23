@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieListApp</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="title">
+            <h1>Movie List App</h1>
+        </div>
+        <div class="searchbox">
+            <input class="searchInput" id="searchInput" type="text" placeholder="enter atleast three letters to search for a movie.."/>
+            <div class="searchBtn" onclick="searchClicked()">Search</div>
+        </div>
+
+        <ul class="list" id="list">
+            
+        </ul>
+       
+         <div class="pagination">
+            <img onclick="leftArrowClicked()" class="leftImg" id="leftImg" src = "./resouces/leftArrow.png">
+            <div class='pageNo' ><h3 id="pageNo">Page 1</h3></div>
+            <img onclick="rightArrowClicked()" class="rightImg" id="rightImg" src = "./resouces/rightArrow.png">
+         </div>
+    </div>
+
+
+
+
+    <script type="text/javascript" src="./app.js"></script>
+</body>
+</html>

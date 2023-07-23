@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieListApp</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        #movieDetails{
+            margin-top : 4%;
+            /* text-align: center; */
+            margin : auto;
+            width: 30%;
+            margin-top : 5%;
+            border : 2px solid black;
+            font-size : 1.5vw;
+            background-color: rgb(220, 242, 247);
+            border-radius: 10px;
+            padding: 0.5vw;
+
+        }
+        .mdImg{
+            width : 100%;
+            height : 30vw;
+        }
+        .ratImg{
+            width : 3vw;
+            height: 3vw;
+            cursor: pointer;
+        }
+
+        .ratDiv{
+            display: flex;
+        }
+        .comDiv{
+            display: flex;
+            background-color: antiquewhite;
+            height : 3vw;
+            align-items: center;
+
+            /* line-height: 3vw; */
+        }
+
+        .submitBtn{
+            background-color: #ee3425;
+            height : 2vw;
+            width: 4vw;; 
+            font-size : 1vw;
+            color : white;
+            border : 2px solid black;
+            text-align: center;
+            cursor: pointer;
+            line-height: 2vw;;
+        }
+
+        #comInput{
+            height : 2vw;
+            width : 50%;
+            color : black
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="title">
+            <h1>Movie List App</h1>
+        </div>
+        <div id="movieDetails">
+
+        </div>
+
+        
+    </div>
+
+    <script>
+
+        let title = ''
+        let movieData = [];
+        window.onload = (event) => {
+            title = localStorage.getItem('last-clicked-movie')
+            
+            let s = localStorage.getItem("movieList")
+            mlist = JSON.parse(s)
+
+            movieData = mlist.filter(e=>{
+                console.log(e.Title +"..." + title)
+                return e.Title == title;
+            })
+            
+            movieData = movieData[0];
+            console.log(movieData)
+
+            let myNode = document.getElementById('movieDetails');
+            while (myNode.firstChild) {
+                myNode.removeChild(myNode.lastChild);
+            }
+
+
+            load()
+        }
+    
+        function load(){
+            const div = document.createElement('div');
+            div.classList.add('mdDiv')
+
+            const mdImg = document.createElement('img');
+            mdImg.setAttribute('src', movieData.Poster);
+            mdImg.classList.add('mdImg')
+            
+            const title = document.createElement('h4');
+            const year = document.createElement('h4');
+            const imdb = document.createElement('h4');
+            const type = document.createElement('h4');
+
+            title.textContent = "Title : " + movieData.Title;
+            year.textContent = "Year : " + movieData.Year;
+            type.textContent = "Type : " + movieData.Type
+            imdb.textContent = "imdbID : " + movieData.imdbID
+            
+
+            div.appendChild(mdImg);
+            div.appendChild(title)
+            div.appendChild(year);
+            div.appendChild(type);
+            div.appendChild(imdb);
+            
+
+            let mainDiv = document.getElementById('movieDetails');
+            
+
+            // Ratings
+            let rating = 0;
+            let comment = "";
+            if(localStorage.getItem(movieData.Title + 'rating')){
+                rating = parseInt(localStorage.getItem(movieData.Title + 'rating').toString());
+            }
+            
+            if(localStorage.getItem(movieData.Title + 'comment')){
+                comment = localStorage.getItem(movieData.Title + 'comment');
+            }
+                
+
+            let ratDiv = document.createElement('div');
+            ratDiv.classList.add('ratDiv')
+            for(let i=1; i<=5; i++){
+                let ratImg = document.createElement('img');
+                ratImg.classList.add('ratImg')
+                ratImg.setAttribute('id', 'ratImg' + i)
+                
+                if(rating){
+                    ratImg.setAttribute('src', './resouces/golden_star.png')
+                    rating -= 1;
+                }
+                else{
+                    ratImg.setAttribute('src', './resouces/white_star.png')
+                }
+
+                ratImg.onclick = ratImgClicked;
+                ratDiv.appendChild(ratImg)
+            }
+
+
+
+            // comments
+
+            let comDiv = document.createElement('div');
+            comDiv.classList.add('comDiv')
+
+            let comInput = document.createElement('input');
+            comInput.setAttribute('type', 'text');
+            comInput.setAttribute('id', 'comInput')
+            comInput.setAttribute('placeholder', 'write some comment ...!!')
+
+            let submitBtn = document.createElement('div');
+            submitBtn.classList.add('submitBtn')
+            submitBtn.setAttribute('id', movieData.Title)
+            submitBtn.textContent = "Submit";
+            submitBtn.onclick = submitBtnClicked;
+
+            comDiv.appendChild(comInput);
+            comDiv.appendChild(submitBtn);
+           
+            if(comment){
+                comInput.value = comment;
+            }
+
+            div.appendChild(ratDiv);
+            div.appendChild(comDiv)
+
+            mainDiv.appendChild(div);
+
+        }
+     
+        load();
+
+        function ratImgClicked(e){
+            let id  = e.target.id;
+            console.log(id)
+            let num = parseInt(id[id.length-1])
+            console.log(num)
+            localStorage.setItem(movieData.Title + 'rating', num);
+
+            let myNode = document.getElementById('movieDetails');
+            while (myNode.firstChild) {
+                myNode.removeChild(myNode.lastChild);
+            }
+            load();
+        }
+
+        function submitBtnClicked(e){
+            let comment = document.getElementById('comInput').value;
+            localStorage.setItem(movieData.Title + 'comment', comment)
+
+            let myNode = document.getElementById('movieDetails');
+            while (myNode.firstChild) {
+                myNode.removeChild(myNode.lastChild);
+            }
+            load()
+        }
+       
+
+    </script>
+</body>
+</html>
